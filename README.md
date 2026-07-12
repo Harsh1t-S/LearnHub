@@ -3,15 +3,15 @@
 A W3Schools-style learning platform. Write a lecture in Word/Google Docs, paste it straight into the editor, drop in images/videos, and publish — students get a live "Try it Yourself" code editor, quizzes, and progress tracking on every lesson.
 
 ## Stack
-- Frontend: React + Vite + Tailwind CSS, Tiptap (rich text editor), Monaco Editor (live code playground), Pyodide (in-browser Python)
-- Backend: Node.js + Express, MySQL (via mysql2), JWT auth, Multer (file uploads)
+- Frontend (`frontend/`): React + Vite + Tailwind CSS, Tiptap (rich text editor), Monaco Editor (live code playground), Pyodide (in-browser Python)
+- Backend (`backend/`): Node.js + Express, MySQL (via mysql2), JWT auth, Multer (file uploads)
 
 ## 1. Set up the database
 
-From the `server` folder, run:
+From the `backend` folder, run:
 
 ```
-cd server
+cd backend
 npm install
 npm run initdb
 ```
@@ -20,23 +20,23 @@ This creates all tables from `config/schema.sql`, using either `DATABASE_URL` (h
 
 ## 2. Configure environment variables
 
-Copy `.env.example` to `.env` in both `server/` and `client/` and fill in your values:
-- `server/.env` — `DATABASE_URL` or `DB_*`, `JWT_SECRET`, `ADMIN_INVITE_CODE`, `CLIENT_URL`
-- `client/.env` — `VITE_API_URL` (only needed in production, when frontend and backend are on different domains)
+Copy `.env.example` to `.env` in both `backend/` and `frontend/` and fill in your values:
+- `backend/.env` — `DATABASE_URL` or `DB_*`, `JWT_SECRET`, `ADMIN_INVITE_CODE`, `CLIENT_URL`
+- `frontend/.env` — `VITE_API_URL` (only needed in production, when frontend and backend are on different domains)
 
 ## 3. Run the backend
 
 ```
-cd server
+cd backend
 npm run dev
 ```
 
-Runs on http://localhost:5000. Uploaded images/videos are stored in `server/uploads/`.
+Runs on http://localhost:5000. Uploaded images/videos are stored in `backend/uploads/`.
 
 ## 4. Run the frontend
 
 ```
-cd client
+cd frontend
 npm install
 npm run dev
 ```
@@ -61,20 +61,20 @@ Anonymous visitors can browse the course catalog and lesson titles, but full les
 
 ## Deployment
 
-- Backend: Railway (or any Node host). Set `DATABASE_URL`, `JWT_SECRET`, `CLIENT_URL`.
-- Frontend: Vercel/Netlify. Set `VITE_API_URL` to your backend's URL + `/api`.
+- Backend (`backend/`): Railway (or any Node host). Set `DATABASE_URL`, `JWT_SECRET`, `CLIENT_URL`.
+- Frontend (`frontend/`): Vercel/Netlify. Set `VITE_API_URL` to your backend's URL + `/api`.
 - Database: Railway MySQL (or any hosted MySQL) — `DATABASE_URL` support is built in.
 
 ## Project structure
 
 ```
 learnhub/
-  server/            Express + MySQL backend
+  backend/           Express + MySQL backend
     config/          db.js (pool), schema.sql, initDb.js
     routes/          auth, courses, lessons, media, progress
     middleware/       auth.js (JWT + role checks)
     uploads/          uploaded images/videos (served at /uploads/...)
-  client/            React + Tailwind frontend
+  frontend/          React + Tailwind frontend
     src/pages/        Home, Courses, CourseView, LessonView, Login, Signup, Admin*
     src/components/   Navbar, Sidebar, LessonEditor (Tiptap), TryItEditor (Monaco + Pyodide), Quiz
     src/context/      AuthContext (JWT stored in localStorage)
