@@ -1,0 +1,16 @@
+JavaScript Fundamentals - Quick Reference
+
+1. Declaring variables
+   let x = 5;      // block-scoped, reassignable
+   const y = 10;   // block-scoped, constant
+   var z = 15;     // function-scoped (avoid in modern JS)
+
+2. Functions
+   function greet(name) {
+     return `Hello, ${name}!`;
+   }
+
+3. Arrow functions
+   const add = (a, b) => a + b;
+
+This file is a sample attachment used to test the "attach any file" button in the LearnHub lesson editor.
